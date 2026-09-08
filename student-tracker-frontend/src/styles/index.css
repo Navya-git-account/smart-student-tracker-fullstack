@@ -333,18 +333,74 @@ textarea {
     gap: 18px
 }
 
-.week-grid {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    border: 1px solid #d1d6df;
-    min-height: 178px
+.calendar-panel {
+  padding: 24px;
 }
 
-.week-grid>div {
-    padding: 10px 5px;
-    border-right: 1px solid #e5e7ec;
-    font-size: 11px;
-    text-align: center
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.calendar-header h2 {
+  margin: 0;
+  font-size: 20px;
+}
+
+.calendar-arrow {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.calendar-weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.calendar-weekdays span {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-day {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calendar-date {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  font-size: 14px;
+}
+
+.today-date {
+  background-color: #66d477;
+  color: white;
+  font-weight: 600;
+}
+
+.empty-day {
+  visibility: hidden;
 }
 
 .simple-list {
