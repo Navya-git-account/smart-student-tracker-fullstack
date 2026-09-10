@@ -15,6 +15,17 @@ import {
   getUrgencyLabel
 } from "../utils/date";
 
+import {
+  ClipboardList,
+  Clock3,
+  BookOpen,
+  BarChart3,
+  CalendarDays,
+  ListChecks
+} from "lucide-react";
+/* ========================================
+   Creates all dates needed for the calendar
+   ======================================== */
 function getCalendarDays(currentMonth) {
   const year = currentMonth.getFullYear();
   const month = currentMonth.getMonth();
@@ -26,11 +37,11 @@ function getCalendarDays(currentMonth) {
   const totalDays = lastDay.getDate();
 
   const calendarDays = [];
-
+  // Add empty spaces before the first day
   for (let i = 0; i < startDay; i++) {
     calendarDays.push(null);
   }
-
+  // Add all days in the selected month
   for (let day = 1; day <= totalDays; day++) {
     calendarDays.push(
       new Date(year, month, day)
@@ -39,8 +50,26 @@ function getCalendarDays(currentMonth) {
 
   return calendarDays;
 }
+/* ========================================
+   Returns greeting based on current time
+   ======================================== */
+function getGreeting() {
+  const hour = new Date().getHours();
 
+  if (hour < 12) {
+    return "Good Morning";
+  }
 
+  if (hour < 18) {
+    return "Good Afternoon";
+  }
+
+  return "Good Evening";
+}
+
+/* ========================================
+   Dashboard Component
+   ======================================== */
 export default function Dashboard() {
 
   const [assignments, setAssignments] = useState([]);
@@ -49,7 +78,9 @@ export default function Dashboard() {
   const [demo, setDemo] = useState(false);
   const [currentMonth, setCurrentMonth] = useState(new Date());
 
-
+  /* ========================================
+     Load assignments and courses from backend
+     ======================================== */
   useEffect(() => {
 
     Promise.all([
@@ -71,11 +102,13 @@ export default function Dashboard() {
 
   }, []);
 
-
+  /* ========================================
+     Find assignments due within 24 hours
+     ======================================== */
   const dueSoon = useMemo(() => {
 
     return assignments.filter((a) => {
-
+      // Ignore completed assignments
       if (
         (a.status || "").toUpperCase() === "COMPLETED"
       ) {
@@ -93,7 +126,9 @@ export default function Dashboard() {
 
   }, [assignments]);
 
-
+  /* ========================================
+     Get the next 4 upcoming assignments
+     ======================================== */
   const upcoming = useMemo(() => {
 
     return [...assignments]
@@ -111,10 +146,10 @@ export default function Dashboard() {
 
   }, [assignments]);
 
-
+  /* Calculate GPA from course data */
   const gpa = calculateGpa(courses);
 
-
+  /* Loading message */
   if (loading) {
     return (
       <p className="loading-state">
@@ -122,7 +157,9 @@ export default function Dashboard() {
       </p>
     );
   }
-
+  /* ========================================
+     Calendar information
+     ======================================== */
   const calendarDays = getCalendarDays(currentMonth);
 
   const today = new Date();
@@ -132,7 +169,7 @@ export default function Dashboard() {
   });
 
   const currentYear = currentMonth.getFullYear();
-
+  /* Go to previous month */
   function goToPreviousMonth() {
     setCurrentMonth(
       new Date(
@@ -142,7 +179,7 @@ export default function Dashboard() {
       )
     );
   }
-
+  /* Go to next month */
   function goToNextMonth() {
     setCurrentMonth(
       new Date(
@@ -154,18 +191,13 @@ export default function Dashboard() {
   }
 
   return (
-    <section className="page-section">
+    <section className="page-section dashboard-page">
 
       <div className="page-heading">
-
         <div>
-          <h1>Dashboard</h1>
-
-          <p>
-            Overview of your current academic work.
-          </p>
+          <h1>{getGreeting()}, Student!</h1>
+          <p>Here's an overview of your current academic work.</p>
         </div>
-
       </div>
 
 
@@ -178,27 +210,92 @@ export default function Dashboard() {
 
       <div className="stats-grid">
 
-        <StatCard
-          value={assignments.length}
-          label="Assignments"
-          helper="Total"
-        />
+        {/* Assignments */}
+        <article className="stat-card">
+          <div className="stat-icon">
+            <ClipboardList size={24} />
+          </div>
 
-        <StatCard
-          value={dueSoon.length}
-          label="Due Soon"
-          helper="(24 hrs)"
-        />
+          <div className="stat-content">
+            <strong className="stat-value">
+              {assignments.length}
+            </strong>
 
-        <StatCard
-          value={courses.length}
-          label="Courses"
-        />
+            <span className="stat-label">
+              Assignments
+            </span>
 
-        <StatCard
-          value={gpa.gpa.toFixed(2)}
-          label="Current GPA"
-        />
+            <span className="stat-helper">
+              Total
+            </span>
+          </div>
+        </article>
+
+
+        {/* Due Soon */}
+        <article className="stat-card">
+          <div className="stat-icon">
+            <Clock3 size={24} />
+          </div>
+
+          <div className="stat-content">
+            <strong className="stat-value">
+              {dueSoon.length}
+            </strong>
+
+            <span className="stat-label">
+              Due Soon
+            </span>
+
+            <span className="stat-helper">
+              Next 24 hours
+            </span>
+          </div>
+        </article>
+
+
+        {/* Courses */}
+        <article className="stat-card">
+          <div className="stat-icon">
+            <BookOpen size={24} />
+          </div>
+
+          <div className="stat-content">
+            <strong className="stat-value">
+              {courses.length}
+            </strong>
+
+            <span className="stat-label">
+              Courses
+            </span>
+
+            <span className="stat-helper">
+              Enrolled
+            </span>
+          </div>
+        </article>
+
+
+        {/* GPA */}
+        <article className="stat-card">
+          <div className="stat-icon">
+            <BarChart3 size={24} />
+          </div>
+
+          <div className="stat-content">
+            <strong className="stat-value">
+              {Number(gpa?.gpa || 0).toFixed(2)}
+            </strong>
+
+            <span className="stat-label">
+              Current GPA
+            </span>
+
+            <span className="stat-helper">
+              Keep it up!
+            </span>
+          </div>
+        </article>
 
       </div>
 

@@ -1,16 +1,39 @@
+/* =========================
+   GLOBAL THEME / COLOR VARIABLES
+   ========================= */
+
 :root {
     font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     color: #202431;
-    background: #f6f7fb
+
+    --primary: #2f80ed;
+    --primary-light: #eaf3ff;
+
+    --background: #f7f9fc;
+    --surface: #ffffff;
+
+    --border: #e4e9f1;
+
+    --danger: #c62828;
+    --danger-bg: #fdecec;
+
+    --success: #168a50;
+    --success-bg: #e8f7ef;
+
 }
+
+/* Apply consistent box sizing to all elements */
 
 * {
     box-sizing: border-box
 }
+/* =========================
+   GLOBAL PAGE STYLES
+   ========================= */
 
 body {
     margin: 0;
-    min-width: 320px;
+    width: 100%;
     min-height: 100vh;
     background: #f6f7fb
 }
@@ -52,6 +75,7 @@ textarea:focus {
 textarea {
     resize: vertical
 }
+/* Accessibility helper: visually hidden but available to screen readers */
 
 .sr-only {
     position: absolute;
@@ -64,6 +88,10 @@ textarea {
     white-space: nowrap;
     border: 0
 }
+
+/* =========================
+   SIDEBAR & NAVIGATION
+   ========================= */
 
 .sidebar {
     position: fixed;
@@ -113,10 +141,14 @@ textarea {
 }
 
 .nav-link.active {
-    background: #d9d8ff;
-    color: #23256c;
-    box-shadow: inset 0 0 0 1px #8d8fe4
+    background: #eaf3ff;
+    color: #1769aa;
+    box-shadow: none;
 }
+
+/* =========================
+   MAIN APPLICATION LAYOUT
+   ========================= */
 
 .page-shell {
     margin-left: 224px;
@@ -124,6 +156,8 @@ textarea {
     display: flex;
     flex-direction: column
 }
+
+/* Top navigation bar */
 
 .topbar {
     min-height: 66px;
@@ -164,10 +198,109 @@ textarea {
     flex: 1
 }
 
+/* Shared page content container */
+
 .page-section {
     max-width: 1240px;
     margin: 0 auto;
     padding: 30px 34px 48px
+}
+
+/* =========================
+   DASHBOARD SCREEN LAYOUT
+   ========================= */
+
+.dashboard-page {
+    height: calc(100vh - 66px);
+    min-height: 0;
+    padding-top: 24px;
+    padding-bottom: 24px;
+
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.dashboard-page .page-heading {
+    flex-shrink: 0;
+    margin-bottom: 18px;
+}
+
+.dashboard-page .stats-grid {
+    flex-shrink: 0;
+    margin-bottom: 18px;
+}
+
+.dashboard-page .dashboard-grid {
+    flex: 1;
+    min-height: 0;
+}
+
+.dashboard-page .upcoming-panel {
+    min-height: 0;
+    height: 100%;
+}
+
+.dashboard-page .dashboard-right {
+    height: 100%;
+    min-height: 0;
+    grid-template-rows: minmax(0, 2fr) minmax(0, 1fr);
+}
+
+.dashboard-page .calendar-panel {
+    min-height: 0;
+    height: 100%;
+    padding: 18px 20px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.dashboard-page .calendar-header {
+    flex-shrink: 0;
+    margin-bottom: 10px;
+}
+
+.dashboard-page .calendar-header h2 {
+    font-size: 18px;
+}
+
+.dashboard-page .calendar-weekdays {
+    flex-shrink: 0;
+    margin-bottom: 4px;
+}
+
+.dashboard-page .calendar-grid {
+    flex: 1;
+    min-height: 0;
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6, minmax(0, 1fr));
+}
+
+.dashboard-page .calendar-day {
+    height: auto;
+    min-height: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dashboard-page .calendar-date {
+    width: 32px;
+    height: 32px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    font-size: 13px;
+}
+
+.dashboard-page .simple-list {
+    gap: 6px;
 }
 
 .page-heading {
@@ -193,6 +326,144 @@ textarea {
     margin: 6px 0 0;
     font-size: 14px
 }
+
+/* =========================
+   DASHBOARD ICONS
+   ========================= */
+
+.stat-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+
+.stat-content {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Dashboard stat cards */
+.stat-card {
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 16px;
+    text-align: left;
+}
+
+
+/* =========================
+   PANEL HEADINGS
+   ========================= */
+
+.panel-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.panel-title svg {
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+.panel-title h2 {
+    margin: 0;
+}
+
+
+/* =========================
+   UPCOMING ASSIGNMENT ICON
+   ========================= */
+
+.upcoming-card {
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+}
+
+
+.assignment-icon {
+    width: 38px;
+    height: 38px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    grid-column: 1;
+    grid-row: 1 / span 2;
+
+    border-radius: 9px;
+
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+
+.upcoming-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+
+.mini-status {
+    grid-column: 3;
+    grid-row: 1 / span 2;
+}
+
+
+/* =========================
+   CALENDAR TITLE
+   ========================= */
+
+.calendar-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+}
+
+.calendar-title svg {
+    color: var(--primary);
+}
+
+.calendar-title h2 {
+    margin: 0;
+}
+
+
+/* =========================
+   RECENT COURSE ICONS
+   ========================= */
+
+.simple-list span {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.simple-list span svg {
+    color: var(--primary);
+    flex-shrink: 0;
+}
+
+/* =========================
+   BUTTONS
+   ========================= */
 
 .button {
     min-height: 38px;
@@ -233,6 +504,10 @@ textarea {
     cursor: not-allowed
 }
 
+/* =========================
+   SHARED CARDS / PANELS
+   ========================= */
+
 .panel,
 .stat-card,
 .data-table {
@@ -255,34 +530,70 @@ textarea {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 16px;
-    margin-bottom: 20px
+    margin-bottom: 20px;
 }
 
 .stat-card {
     min-height: 110px;
-    border-radius: 6px;
-    padding: 18px 14px;
+    padding: 18px 20px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+
+    gap: 16px;
+
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+
+    box-shadow: 0 5px 18px rgba(36, 45, 66, .05);
+}
+
+.stat-icon {
+    width: 52px;
+    height: 52px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.stat-content {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center
+    align-items: flex-start;
+    gap: 3px;
+
+    min-width: 0;
 }
 
 .stat-value {
-    font-size: 26px;
-    line-height: 1
+    font-size: 28px;
+    line-height: 1;
+    font-weight: 700;
+    color: var(--text);
 }
 
 .stat-label {
-    font-size: 13px;
-    margin-top: 7px;
-    font-weight: 650
+    margin-top: 5px;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
 }
 
 .stat-helper {
+    margin-top: 0;
     font-size: 12px;
-    color: #7a8190;
-    margin-top: 2px
+    color: var(--text-muted);
 }
 
 .dashboard-grid {
@@ -394,9 +705,10 @@ textarea {
 }
 
 .today-date {
-  background-color: #66d477;
-  color: white;
-  font-weight: 600;
+  background: #2f80ed;
+    color: #ffffff;
+    font-weight: 700;
+    box-shadow: 0 3px 8px rgba(47, 128, 237, 0.22);
 }
 
 .empty-day {
@@ -408,6 +720,10 @@ textarea {
     gap: 10px;
     font-size: 14px
 }
+
+/* =========================
+   ASSIGNMENTS / COURSES TOOLBAR
+   ========================= */
 
 .toolbar {
     display: flex;
@@ -494,6 +810,8 @@ textarea {
     color: #b42318
 }
 
+/* Status badges for assignment state */
+
 .status-pill {
     display: inline-flex;
     border-radius: 999px;
@@ -522,6 +840,7 @@ textarea {
     color: #45489a
 }
 
+/* Table pagination controls */
 .pagination {
     display: flex;
     justify-content: center;
@@ -541,6 +860,10 @@ textarea {
     background: #2d3142;
     color: #fff
 }
+
+/* =========================
+   FORMS
+   ========================= */
 
 .narrow-form-page {
     max-width: 780px
@@ -631,6 +954,10 @@ textarea {
     gap: 12px
 }
 
+/* =========================
+   GPA CALCULATOR
+   ========================= */
+
 .gpa-layout {
     display: grid;
     grid-template-columns: minmax(0, 1fr) 270px;
@@ -696,9 +1023,17 @@ textarea {
     font-size: 12px
 }
 
+/* =========================
+   CONTACT PAGE
+   ========================= */
+
 .contact-panel {
     max-width: 720px
 }
+
+/* =========================
+   CALENDAR PAGE
+   ========================= */
 
 .calendar-month-grid {
     display: grid;
@@ -721,10 +1056,18 @@ textarea {
     color: #6b7280
 }
 
+/* =========================
+   NOTIFICATIONS PAGE
+   ========================= */
+
 .notification-list {
     display: grid;
     gap: 12px
 }
+
+/* =========================
+   SETTINGS PAGE
+   ========================= */
 
 .settings-panel {
     display: grid;
@@ -757,6 +1100,10 @@ textarea {
     transform: scale(1.15)
 }
 
+/* =========================
+   UTILITY / EMPTY STATES
+   ========================= */
+
 .not-found {
     text-align: center;
     padding: 50px 20px
@@ -780,6 +1127,10 @@ textarea {
     color: #717986
 }
 
+/* =========================
+   FOOTER
+   ========================= */
+
 .app-footer {
     min-height: 56px;
     border-top: 1px solid #e3e6ed;
@@ -790,6 +1141,10 @@ textarea {
     font-size: 12px;
     background: #fff
 }
+
+/* =========================
+   RESPONSIVE: TABLETS
+   ========================= */
 
 @media(max-width:980px) {
     .sidebar {
@@ -813,6 +1168,10 @@ textarea {
         grid-template-columns: 1fr 1fr
     }
 }
+
+/* =========================
+   RESPONSIVE: MOBILE
+   ========================= */
 
 @media(max-width:720px) {
     .sidebar {
