@@ -24,3 +24,101 @@ export const courseApi = {
   update: (id, data) => request(`/courses/${id}`, { method: "PUT", body: JSON.stringify(data) }),
   remove: (id) => request(`/courses/${id}`, { method: "DELETE" })
 };
+export const authApi = {
+
+  register: async (student) => {
+
+    const response = await fetch(
+      "/api/auth/register",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        credentials: "include",
+
+        body: JSON.stringify(student)
+      }
+    );
+
+
+    const data = await response.json();
+
+
+    if (!response.ok) {
+      throw new Error(
+        data.message ||
+        "Registration failed."
+      );
+    }
+
+
+    return data;
+  },
+
+
+  login: async (credentials) => {
+
+    const response = await fetch(
+      "/api/auth/login",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json"
+        },
+
+        credentials: "include",
+
+        body: JSON.stringify(credentials)
+      }
+    );
+
+
+    const data = await response.json();
+
+
+    if (!response.ok) {
+      throw new Error(
+        data.message ||
+        "Invalid email or password."
+      );
+    }
+
+
+    return data;
+  },
+
+
+  getCurrentStudent: async () => {
+
+    const response = await fetch(
+      "/api/auth/me",
+      {
+        credentials: "include"
+      }
+    );
+
+
+    if (!response.ok) {
+      return null;
+    }
+
+
+    return response.json();
+  },
+
+
+  logout: async () => {
+
+    await fetch(
+      "/api/auth/logout",
+      {
+        method: "POST",
+        credentials: "include"
+      }
+    );
+  }
+};
