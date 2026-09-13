@@ -419,13 +419,28 @@ textarea {
     gap: 3px;
 }
 
+/* Upcoming Assignment Status Colors */
 
-.mini-status {
-    grid-column: 3;
-    grid-row: 1 / span 2;
+.mini-status.overdue {
+    background: #fdecec;
+    color: #c62828 !important;
+    padding: 6px 12px;
+    border-radius: 20px;
 }
 
+.mini-status.due-soon {
+    background: #fff3cd;
+    color: #b26a00 !important;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
 
+.mini-status.upcoming {
+    background: #eaf3ff;
+    color: #2f80ed !important;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
 /* =========================
    CALENDAR TITLE
    ========================= */

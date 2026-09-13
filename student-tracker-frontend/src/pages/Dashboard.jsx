@@ -312,30 +312,45 @@ export default function Dashboard() {
 
             {upcoming.length ? (
 
-              upcoming.map((a) => (
+              upcoming.map((a) => {
 
-                <article
-                  className="upcoming-card"
-                  key={a.id}
-                >
+                const urgency = getUrgencyLabel(
+                  a.dueDate,
+                  a.status
+                );
 
-                  <strong>
-                    {a.title}
-                  </strong>
+                let statusClass = "upcoming";
 
-                  <span>
-                    {a.course || "Course"} · {formatDate(a.dueDate)}
-                  </span>
+                if (urgency === "Overdue") {
+                  statusClass = "overdue";
+                } else if (urgency === "Due Soon") {
+                  statusClass = "due-soon";
+                }
 
-                  <span className="mini-status">
-                    {getUrgencyLabel(
-                      a.dueDate,
-                      a.status
-                    )}
-                  </span>
+                return (
 
-                </article>
-              ))
+                  <article
+                    className="upcoming-card"
+                    key={a.id}
+                  >
+
+                    <strong>
+                      {a.title}
+                    </strong>
+
+                    <span>
+                      {a.course || "Course"} · {formatDate(a.dueDate)}
+                    </span>
+
+                    <span className={`mini-status ${statusClass}`}>
+                      {urgency}
+                    </span>
+
+                  </article>
+
+                );
+
+              })
 
             ) : (
 
