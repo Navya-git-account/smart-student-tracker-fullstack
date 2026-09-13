@@ -207,6 +207,149 @@ textarea {
 }
 
 /* =========================
+   AUTH PAGES
+   ========================= */
+
+.auth-page {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px 20px;
+
+    background: var(--background);
+}
+
+
+.auth-card {
+    width: min(430px, 100%);
+
+    padding: 34px;
+
+    background: var(--surface);
+
+    border: 1px solid var(--border);
+
+    border-radius: 12px;
+
+    box-shadow:
+        0 8px 30px
+        rgba(36, 45, 66, 0.08);
+}
+
+
+.auth-brand {
+    text-align: center;
+
+    margin-bottom: 28px;
+}
+
+
+.auth-brand h1 {
+    margin: 0;
+
+    font-size: 28px;
+
+    color: #172033;
+}
+
+
+.auth-brand p {
+    margin: 7px 0 0;
+
+    color: #6f7b8f;
+
+    font-size: 14px;
+}
+
+
+.auth-form {
+    display: grid;
+
+    gap: 16px;
+}
+
+
+.auth-form label {
+    display: grid;
+
+    gap: 6px;
+
+    font-size: 13px;
+
+    font-weight: 650;
+
+    color: #172033;
+}
+
+
+.auth-form input {
+    min-height: 42px;
+}
+
+
+.auth-button {
+    width: 100%;
+
+    margin-top: 6px;
+}
+
+
+.auth-message {
+    margin: 0;
+
+    padding: 10px 12px;
+
+    border-radius: 6px;
+
+    font-size: 13px;
+}
+
+
+.auth-message.error {
+    background: #fdecec;
+
+    color: #c62828;
+}
+
+
+.auth-message.success {
+    background: #e8f7ef;
+
+    color: #168a50;
+}
+
+
+.auth-switch {
+    margin:
+        22px
+        0
+        0;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    color: #6f7b8f;
+}
+
+
+.auth-switch a {
+    color: var(--primary);
+
+    font-weight: 650;
+
+    text-decoration: none;
+}
+
+
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+/* =========================
    DASHBOARD SCREEN LAYOUT
    ========================= */
 
