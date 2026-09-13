@@ -1377,91 +1377,243 @@ textarea {
    RESPONSIVE: MOBILE
    ========================= */
 
-@media(max-width:720px) {
+@media (max-width: 720px) {
+
     .sidebar {
         position: static;
         width: 100%;
-        padding: 14px;
+        padding: 12px 14px;
         border-right: 0;
-        border-bottom: 1px solid #dde1e9
+        border-bottom: 1px solid var(--border);
+        background: var(--surface);
     }
 
     .brand {
-        margin: 0 0 12px
+        margin: 0 0 12px;
+        text-align: center;
     }
 
     .side-nav {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr)
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        scrollbar-width: thin;
+    }
+
+    .nav-link {
+        flex: 0 0 auto;
+        white-space: nowrap;
+        padding: 9px 12px;
     }
 
     .page-shell {
-        margin-left: 0
+        margin-left: 0;
+        width: 100%;
     }
 
     .topbar {
-        display: none
+        display: flex;
+        min-height: 56px;
+        padding: 0 16px;
+    }
+
+    .topbar-actions {
+        margin-left: auto;
     }
 
     .page-section {
-        padding: 22px 16px 36px
+        width: 100%;
+        padding: 20px 14px 32px;
     }
 
     .page-heading {
-        flex-direction: column
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
     }
 
-    .stats-grid,
+    .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .dashboard-grid,
     .form-grid,
     .gpa-sidebar,
     .calendar-month-grid {
-        grid-template-columns: 1fr
-    }
-
-    .dashboard-grid {
-        grid-template-columns: 1fr
+        grid-template-columns: 1fr;
     }
 
     .toolbar {
         flex-direction: column;
-        align-items: stretch
+        align-items: stretch;
+        gap: 10px;
     }
 
     .filter-group {
         width: 100%;
-        overflow-x: auto
+        overflow-x: auto;
+        display: flex;
+        gap: 8px;
     }
 
     .filter {
-        flex: 1;
-        white-space: nowrap
+        flex: 0 0 auto;
+        white-space: nowrap;
     }
 
     .search-label {
-        width: 100%
+        width: 100%;
     }
 
     .data-table {
-        overflow-x: auto
+        overflow-x: auto;
+        width: 100%;
     }
 
     .data-row {
-        min-width: 720px
+        min-width: 680px;
     }
 
     .courses-row {
-        min-width: 620px
+        min-width: 580px;
     }
 
     .gpa-row {
-        min-width: 650px
+        min-width: 600px;
     }
 
     .form-actions {
-        flex-direction: column-reverse
+        flex-direction: column-reverse;
+        gap: 10px;
     }
 
     .form-actions .button {
-        width: 100%
+        width: 100%;
+    }
+
+    .calendar-panel,
+    .upcoming-panel,
+    .recent-courses-panel {
+        width: 100%;
+    }
+
+    .calendar-grid {
+        gap: 4px;
+    }
+
+    .calendar-date {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .user-dropdown {
+        right: 0;
+    }
+}
+/* =========================
+   MOBILE DASHBOARD FIX
+   ========================= */
+
+@media (max-width: 720px) {
+
+    /* Allow dashboard to grow naturally */
+    .dashboard-page {
+        height: auto !important;
+        min-height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+        display: block !important;
+    }
+
+    /* Main dashboard content should stack */
+    .dashboard-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+        height: auto !important;
+        min-height: 0 !important;
+    }
+
+    /* Upcoming assignments */
+    .upcoming-panel {
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    .upcoming-list {
+        height: auto !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    .upcoming-card {
+        height: auto !important;
+        min-height: 70px !important;
+    }
+
+    /* Calendar */
+    .dashboard-page .calendar-panel {
+        height: auto !important;
+        min-height: 360px !important;
+        max-height: none !important;
+        overflow: visible !important;
+    }
+
+    .dashboard-page .calendar-grid {
+        flex: none !important;
+        height: auto !important;
+        min-height: 260px !important;
+
+        display: grid !important;
+        grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+        grid-template-rows: repeat(6, 40px) !important;
+
+        gap: 4px !important;
+    }
+
+    .dashboard-page .calendar-day {
+        width: 100% !important;
+        height: 40px !important;
+        min-height: 40px !important;
+
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* Recent courses */
+    .recent-courses-panel {
+        position: static !important;
+        height: auto !important;
+        min-height: 0 !important;
+        max-height: none !important;
+        overflow: visible !important;
+        margin-top: 0 !important;
+    }
+
+    /* Prevent panels from overlapping */
+    .panel,
+    .dashboard-panel {
+        position: static !important;
+    }
+
+    /* Page spacing */
+    .page-section {
+        height: auto !important;
+        min-height: calc(100vh - 56px) !important;
+        overflow: visible !important;
+        padding-bottom: 40px !important;
+    }
+
+    /* Footer should come after all dashboard content */
+    footer,
+    .footer {
+        position: static !important;
+        margin-top: 20px !important;
     }
 }
