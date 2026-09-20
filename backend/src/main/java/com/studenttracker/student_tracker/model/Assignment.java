@@ -1,6 +1,11 @@
 package com.studenttracker.student_tracker.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
 import java.time.LocalDate;
 
 @Entity
@@ -12,18 +17,20 @@ public class Assignment {
     private Long id;
 
     private String title;
-
     private String description;
-
     private LocalDate dueDate;
-
     private String status;
 
+    // Required by JPA
     public Assignment() {
     }
 
-    public Assignment(String title, String description,
-                      LocalDate dueDate, String status) {
+    public Assignment(
+            String title,
+            String description,
+            LocalDate dueDate,
+            String status) {
+
         this.title = title;
         this.description = description;
         this.dueDate = dueDate;
