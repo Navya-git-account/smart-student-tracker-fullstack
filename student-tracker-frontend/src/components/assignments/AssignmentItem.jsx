@@ -1,10 +1,10 @@
 import { Pencil, Trash2 } from "lucide-react";
 import { Link } from "react-router-dom";
+
 import { formatDate, getUrgencyLabel } from "../../utils/date";
 
-
 export default function AssignmentItem({ assignment, onDelete }) {
-
+  // Determine the assignment status based on its due date and completion status
   const urgency = getUrgencyLabel(
     assignment.dueDate,
     assignment.status
@@ -12,7 +12,6 @@ export default function AssignmentItem({ assignment, onDelete }) {
 
   return (
     <div className="data-row assignments-row">
-
       <span className="strong-cell">
         {assignment.title}
       </span>
@@ -36,7 +35,7 @@ export default function AssignmentItem({ assignment, onDelete }) {
       </span>
 
       <span className="row-actions">
-
+        {/* Pass the selected assignment to the edit page */}
         <Link
           className="table-icon-btn"
           to={`/assignments/${assignment.id}/edit`}
@@ -54,9 +53,7 @@ export default function AssignmentItem({ assignment, onDelete }) {
         >
           <Trash2 size={16} />
         </button>
-
       </span>
-
     </div>
   );
 }
