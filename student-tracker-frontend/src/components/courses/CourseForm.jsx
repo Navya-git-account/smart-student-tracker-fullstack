@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import FormMessage from "../common/FormMessage";
 
+import FormMessage from "../common/FormMessage";
 
 export default function CourseForm({
   course,
@@ -8,7 +8,7 @@ export default function CourseForm({
   onCancel,
   isSaving
 }) {
-
+  // Stores the current values entered in the course form
   const [form, setForm] = useState({
     courseCode: "",
     courseName: "",
@@ -17,9 +17,10 @@ export default function CourseForm({
     grade: "A"
   });
 
+  // Stores validation errors for individual form fields
   const [errors, setErrors] = useState({});
 
-
+  // Populate the form when editing an existing course
   useEffect(() => {
     setForm({
       courseCode: course?.courseCode || "",
@@ -30,42 +31,43 @@ export default function CourseForm({
     });
   }, [course]);
 
-
-  function change(e) {
+  // Updates the changed field and clears its previous validation error
+  function handleChange(e) {
     const { name, value } = e.target;
 
-    setForm((c) => ({
-      ...c,
+    setForm((currentForm) => ({
+      ...currentForm,
       [name]: value
     }));
 
-    setErrors((c) => ({
-      ...c,
+    setErrors((currentErrors) => ({
+      ...currentErrors,
       [name]: ""
     }));
   }
 
-
-  function submit(e) {
+  // Validates the form before saving the course
+  function handleSubmit(e) {
     e.preventDefault();
 
-    const next = {};
+    const nextErrors = {};
 
     if (!form.courseCode.trim()) {
-      next.courseCode = "Course code is required.";
+      nextErrors.courseCode = "Course code is required.";
     }
 
     if (!form.courseName.trim()) {
-      next.courseName = "Course name is required.";
+      nextErrors.courseName = "Course name is required.";
     }
 
     if (!Number(form.credits) || Number(form.credits) < 1) {
-      next.credits = "Credits must be at least 1.";
+      nextErrors.credits = "Credits must be at least 1.";
     }
 
-    setErrors(next);
+    setErrors(nextErrors);
 
-    if (!Object.keys(next).length) {
+    // Save only when all validation checks pass
+    if (!Object.keys(nextErrors).length) {
       onSave({
         ...form,
         credits: Number(form.credits)
@@ -73,21 +75,19 @@ export default function CourseForm({
     }
   }
 
-
   return (
     <form
       className="course-form"
-      onSubmit={submit}
+      onSubmit={handleSubmit}
     >
       <div className="form-grid">
-
         <label>
           <span>Course Code</span>
 
           <input
             name="courseCode"
             value={form.courseCode}
-            onChange={change}
+            onChange={handleChange}
           />
 
           <FormMessage>
@@ -95,14 +95,13 @@ export default function CourseForm({
           </FormMessage>
         </label>
 
-
         <label>
           <span>Course Name</span>
 
           <input
             name="courseName"
             value={form.courseName}
-            onChange={change}
+            onChange={handleChange}
           />
 
           <FormMessage>
@@ -110,17 +109,15 @@ export default function CourseForm({
           </FormMessage>
         </label>
 
-
         <label>
           <span>Instructor</span>
 
           <input
             name="instructor"
             value={form.instructor}
-            onChange={change}
+            onChange={handleChange}
           />
         </label>
-
 
         <label>
           <span>Credit Hours</span>
@@ -131,7 +128,7 @@ export default function CourseForm({
             max="8"
             name="credits"
             value={form.credits}
-            onChange={change}
+            onChange={handleChange}
           />
 
           <FormMessage>
@@ -139,14 +136,13 @@ export default function CourseForm({
           </FormMessage>
         </label>
 
-
         <label>
           <span>Grade</span>
 
           <select
             name="grade"
             value={form.grade}
-            onChange={change}
+            onChange={handleChange}
           >
             {[
               "A",
@@ -160,19 +156,16 @@ export default function CourseForm({
               "D+",
               "D",
               "F"
-            ].map((g) => (
-              <option key={g}>
-                {g}
+            ].map((grade) => (
+              <option key={grade}>
+                {grade}
               </option>
             ))}
           </select>
         </label>
-
       </div>
 
-
       <div className="form-actions">
-
         <button
           type="button"
           className="button secondary"
@@ -192,7 +185,6 @@ export default function CourseForm({
               ? "Update Course"
               : "Add Course"}
         </button>
-
       </div>
     </form>
   );

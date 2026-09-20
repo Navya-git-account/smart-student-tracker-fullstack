@@ -1,13 +1,12 @@
 import CourseItem from "./CourseItem";
 import EmptyState from "../common/EmptyState";
 
-
 export default function CourseList({
   courses,
   onEdit,
   onDelete
 }) {
-
+  // Show a helpful message when there are no courses to display
   if (!courses.length) {
     return (
       <EmptyState
@@ -22,7 +21,6 @@ export default function CourseList({
       className="data-table"
       aria-label="Courses"
     >
-
       <div className="data-row table-header courses-row">
         <span>Course Code</span>
         <span>Course Name</span>
@@ -38,7 +36,6 @@ export default function CourseList({
           onDelete={onDelete}
         />
       ))}
-
     </section>
   );
 }
