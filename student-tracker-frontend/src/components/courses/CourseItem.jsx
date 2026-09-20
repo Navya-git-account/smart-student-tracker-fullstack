@@ -1,15 +1,12 @@
 import { Pencil, Trash2 } from "lucide-react";
 
-
 export default function CourseItem({
   course,
   onEdit,
   onDelete
 }) {
-
   return (
     <div className="data-row courses-row">
-
       <span className="strong-cell">
         {course.courseCode}
       </span>
@@ -22,8 +19,8 @@ export default function CourseItem({
         {course.instructor || "Not set"}
       </span>
 
+      {/* Provides actions to edit or delete the selected course */}
       <span className="row-actions">
-
         <button
           className="table-icon-btn"
           type="button"
@@ -41,9 +38,7 @@ export default function CourseItem({
         >
           <Trash2 size={16} />
         </button>
-
       </span>
-
     </div>
   );
 }
