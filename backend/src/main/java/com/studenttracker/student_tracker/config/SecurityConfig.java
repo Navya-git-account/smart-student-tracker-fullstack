@@ -10,38 +10,28 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
-
+    // Provides BCrypt password hashing for student passwords
     @Bean
     public PasswordEncoder passwordEncoder() {
-
         return new BCryptPasswordEncoder();
-
     }
 
-
+    // Configures access rules for application endpoints
     @Bean
     public SecurityFilterChain securityFilterChain(
-            HttpSecurity http
-    ) throws Exception {
+            HttpSecurity http) throws Exception {
 
         http
-
-                .csrf(csrf ->
-                        csrf.disable()
-                )
-
-                .authorizeHttpRequests(auth ->
-                        auth
-                                .requestMatchers(
-                                        "/api/auth/register",
-                                        "/api/auth/login"
-                                )
-                                .permitAll()
-
-                                .anyRequest()
-                                .permitAll()
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(
+                                "/api/auth/register",
+                                "/api/auth/login"
+                        )
+                        .permitAll()
+                        .anyRequest()
+                        .permitAll()
                 );
-
 
         return http.build();
     }
