@@ -17,16 +17,19 @@ public class CourseController {
         this.courseRepository = courseRepository;
     }
 
+    // Retrieve all courses
     @GetMapping
     public List<Course> getAllCourses() {
         return courseRepository.findAll();
     }
 
+    // Create a new course
     @PostMapping
     public Course createCourse(@RequestBody Course course) {
         return courseRepository.save(course);
     }
 
+    // Update an existing course
     @PutMapping("/{id}")
     public ResponseEntity<Course> updateCourse(
             @PathVariable Long id,
@@ -40,11 +43,13 @@ public class CourseController {
                     course.setGrade(updatedCourse.getGrade());
 
                     Course savedCourse = courseRepository.save(course);
+
                     return ResponseEntity.ok(savedCourse);
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    // Delete a course by ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
 
@@ -53,6 +58,7 @@ public class CourseController {
         }
 
         courseRepository.deleteById(id);
+
         return ResponseEntity.noContent().build();
     }
 }

@@ -13,22 +13,25 @@ public class AssignmentController {
 
     private final AssignmentRepository assignmentRepository;
 
-    public AssignmentController(
-            AssignmentRepository assignmentRepository) {
+    public AssignmentController(AssignmentRepository assignmentRepository) {
         this.assignmentRepository = assignmentRepository;
     }
 
+    // Retrieve all assignments
     @GetMapping
     public List<Assignment> getAllAssignments() {
         return assignmentRepository.findAll();
     }
 
+    // Create a new assignment
     @PostMapping
     public Assignment createAssignment(
             @RequestBody Assignment assignment) {
+
         return assignmentRepository.save(assignment);
     }
 
+    // Update an existing assignment
     @PutMapping("/{id}")
     public ResponseEntity<Assignment> updateAssignment(
             @PathVariable Long id,
@@ -37,17 +40,19 @@ public class AssignmentController {
         return assignmentRepository.findById(id)
                 .map(assignment -> {
                     assignment.setTitle(updatedAssignment.getTitle());
-                    assignment.setDescription(
-                            updatedAssignment.getDescription());
+                    assignment.setDescription(updatedAssignment.getDescription());
                     assignment.setDueDate(updatedAssignment.getDueDate());
                     assignment.setStatus(updatedAssignment.getStatus());
 
-                    return ResponseEntity.ok(
-                            assignmentRepository.save(assignment));
+                    Assignment savedAssignment =
+                            assignmentRepository.save(assignment);
+
+                    return ResponseEntity.ok(savedAssignment);
                 })
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    // Delete an assignment by ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteAssignment(
             @PathVariable Long id) {
@@ -57,6 +62,7 @@ public class AssignmentController {
         }
 
         assignmentRepository.deleteById(id);
+
         return ResponseEntity.noContent().build();
     }
 }
