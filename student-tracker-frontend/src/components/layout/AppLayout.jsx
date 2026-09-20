@@ -9,7 +9,7 @@ export default function AppLayout() {
       <div className="page-shell">
         <TopBar />
         <main className="page-content"><Outlet /></main>
-        <footer className="app-footer">Smart Student Tracker · Stay organized and on track</footer>
+        <footer className="app-footer">Smart Student Tracker · Stay organized and on Say Head</footer>
       </div>
     </div>
   );
