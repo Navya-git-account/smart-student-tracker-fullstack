@@ -1,9 +1,8 @@
 import AssignmentItem from "./AssignmentItem";
 import EmptyState from "../common/EmptyState";
 
-
 export default function AssignmentList({ assignments, onDelete }) {
-
+  // Show a helpful message when there are no assignments to display
   if (!assignments.length) {
     return (
       <EmptyState
