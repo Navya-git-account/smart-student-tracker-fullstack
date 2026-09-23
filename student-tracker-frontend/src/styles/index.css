@@ -104,8 +104,8 @@ textarea {
 }
 
 .brand {
-    width: 120px;
-    border: 2px solid #29303c;
+    width: 150px;
+    border: 2px solid #ffffff;
     padding: 8px 9px;
     font-weight: 700;
     line-height: 1.05;
@@ -115,7 +115,7 @@ textarea {
     align-items: center
 }
 .brand-logo {
-  width: 100px;
+  width: 150px;
   height: auto;
   object-fit: contain;
 }
