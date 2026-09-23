@@ -1,6 +1,10 @@
 package com.studenttracker.student_tracker.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "courses")
@@ -15,11 +19,16 @@ public class Course {
     private Integer credits;
     private String grade;
 
+    // Required by JPA
     public Course() {
     }
 
-    public Course(String courseCode, String courseName,
-                  Integer credits, String grade) {
+    public Course(
+            String courseCode,
+            String courseName,
+            Integer credits,
+            String grade) {
+
         this.courseCode = courseCode;
         this.courseName = courseName;
         this.credits = credits;
