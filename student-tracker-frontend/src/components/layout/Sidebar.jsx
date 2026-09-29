@@ -3,7 +3,7 @@ import { Bell, BookOpen, CalendarDays, Calculator, ClipboardList, ContactRound, 
 import studentTrackerLogo from "../../assets/student-tracker-logo.png";
 
 const links = [
-  { to: "/", label: "Dashboard", icon: LayoutDashboard, end: true },
+  { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard, end: true },
   { to: "/assignments", label: "Assignments", icon: ClipboardList },
   { to: "/courses", label: "Courses", icon: BookOpen },
   { to: "/gpa", label: "GPA Calculator", icon: Calculator },
